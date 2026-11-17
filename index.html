@@ -1,470 +1,343 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TKJ Digital Network | Company Profile</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMK BANJAR ASRI - Unggul dalam Teknologi dan Kejuruan</title>
+    <style>
+        /* Reset & Variabel Warna */
+        :root {
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent: #0ea5e9;
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+        body {
+            background-color: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+        }
 
-<!-- Supabase -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+        /* Navigasi */
+        nav {
+            background-color: rgba(15, 23, 42, 0.95);
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid #334155;
+        }
+        .logo {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--accent);
+            letter-spacing: 1px;
+        }
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: var(--accent);
+        }
 
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-}
+        /* Hero Section */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+        }
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        header h1 span {
+            color: var(--accent);
+        }
+        #typing-text {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            min-height: 30px;
+            margin-bottom: 2rem;
+        }
+        .btn {
+            background-color: var(--accent);
+            color: #fff;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background-color: #0284c7;
+        }
 
-body {
-    font-family: Arial, sans-serif;
-    background: #071426;
-    color: white;
-    line-height: 1.6;
-}
+        /* Section Umum */
+        section {
+            padding: 5rem 10%;
+        }
+        h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            color: var(--accent);
+        }
 
-header {
-    background: #0b1d35;
-    padding: 20px 8%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
+        /* Profil & Keahlian (Grid) */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .card {
+            background-color: var(--secondary);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid #334155;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+        .card h3 {
+            margin-bottom: 0.8rem;
+            color: var(--accent);
+        }
+        .badge {
+            display: inline-block;
+            background-color: rgba(14, 165, 233, 0.15);
+            color: var(--accent);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
 
-.logo {
-    font-size: 23px;
-    font-weight: bold;
-    color: #38bdf8;
-}
+        /* Fasilitas & Pimpinan */
+        .team-card {
+            text-align: center;
+        }
+        .avatar {
+            width: 80px;
+            height: 80px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
 
-nav a {
-    color: white;
-    text-decoration: none;
-    margin-left: 20px;
-    font-size: 14px;
-}
+        /* Form Kontak */
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        input, select, textarea {
+            padding: 1rem;
+            border-radius: 5px;
+            border: 1px solid #334155;
+            background-color: var(--secondary);
+            color: var(--text);
+            font-size: 1rem;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
 
-nav a:hover {
-    color: #38bdf8;
-}
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--secondary);
+            color: var(--text-muted);
+            border-top: 1px solid #334155;
+        }
 
-.hero {
-    min-height: 85vh;
-    display: flex;
-    align-items: center;
-    padding: 60px 8%;
-    background: linear-gradient(120deg, #071426, #123d68);
-}
-
-.hero-content {
-    max-width: 700px;
-}
-
-.hero h1 {
-    font-size: 48px;
-    line-height: 1.2;
-    margin-bottom: 20px;
-}
-
-.hero h1 span {
-    color: #38bdf8;
-}
-
-.hero p {
-    color: #cbd5e1;
-    margin-bottom: 30px;
-}
-
-.btn {
-    display: inline-block;
-    padding: 13px 25px;
-    background: #0ea5e9;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
-}
-
-.btn:hover {
-    background: #0284c7;
-}
-
-section {
-    padding: 80px 8%;
-}
-
-.section-title {
-    text-align: center;
-    font-size: 32px;
-    margin-bottom: 15px;
-    color: #38bdf8;
-}
-
-.section-desc {
-    text-align: center;
-    color: #cbd5e1;
-    margin-bottom: 40px;
-}
-
-.about {
-    background: #0b1d35;
-    text-align: center;
-}
-
-.about p {
-    max-width: 800px;
-    margin: auto;
-    color: #cbd5e1;
-}
-
-.cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-}
-
-.card {
-    background: #102945;
-    padding: 30px;
-    border-radius: 12px;
-    border: 1px solid #1e4568;
-    transition: 0.3s;
-}
-
-.card:hover {
-    transform: translateY(-7px);
-    border-color: #38bdf8;
-}
-
-.card h3 {
-    color: #38bdf8;
-    margin-bottom: 10px;
-}
-
-.card p {
-    color: #cbd5e1;
-    font-size: 14px;
-}
-
-.icon {
-    font-size: 35px;
-    margin-bottom: 15px;
-}
-
-.contact {
-    background: #0b1d35;
-}
-
-form {
-    max-width: 550px;
-    margin: auto;
-}
-
-input, textarea {
-    width: 100%;
-    padding: 14px;
-    margin-bottom: 15px;
-    border: 1px solid #31506e;
-    border-radius: 7px;
-    background: #071426;
-    color: white;
-    outline: none;
-}
-
-input:focus, textarea:focus {
-    border-color: #38bdf8;
-}
-
-textarea {
-    resize: vertical;
-    min-height: 120px;
-}
-
-footer {
-    text-align: center;
-    padding: 25px;
-    background: #06101e;
-    color: #94a3b8;
-    font-size: 13px;
-}
-
-@media(max-width: 700px) {
-    header {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    nav {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 12px;
-    }
-
-    nav a {
-        margin: 0;
-    }
-
-    .hero h1 {
-        font-size: 34px;
-    }
-
-    section {
-        padding: 60px 6%;
-    }
-}
-</style>
+        /* Responsif Mobile */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2.2rem; }
+            .nav-links { display: none; }
+        }
+    </style>
 </head>
-
 <body>
 
-<header>
-    <div class="logo">TKJ NETWORK.</div>
-
+    <!-- Navigasi -->
     <nav>
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#facilities">Facilities</a>
-        <a href="#contact">Contact</a>
+        <div class="logo">SMK BANJAR ASRI</div>
+        <ul class="nav-links">
+            <li><a href="#home">Beranda</a></li>
+            <li><a href="#tentang">Profil</a></li>
+            <li><a href="#jurusan">Kompetensi Keahlian</a></li>
+            <li><a href="#pimpinan">Pimpinan Sekolah</a></li>
+            <li><a href="#ppdb">Info PPDB</a></li>
+        </ul>
     </nav>
-</header>
 
-<!-- HOME -->
-<section class="hero" id="home">
-    <div class="hero-content">
-        <p>WELCOME TO OUR DIGITAL WORLD</p>
+    <!-- Hero Section -->
+    <header id="home">
+        <h1>Selamat Datang di <span>SMK BANJAR ASRI</span></h1>
+        <p id="typing-text"></p>
+        <a href="#jurusan" class="btn">Jelajahi Program Keahlian</a>
+    </header>
 
-        <h1>
-            Building The Future With
-            <span>Technology.</span>
-        </h1>
-
-        <p>
-            Teknik Komputer dan Jaringan merupakan bidang
-            teknologi yang mempelajari komputer, jaringan,
-            server, programming, dan keamanan digital.
-        </p>
-
-        <a href="#about" class="btn">Explore More →</a>
-    </div>
-</section>
-
-<!-- ABOUT -->
-<section class="about" id="about">
-    <h2 class="section-title">About TKJ</h2>
-
-    <p class="section-desc">
-        Mengenal lebih dekat dunia Teknik Komputer dan Jaringan.
-    </p>
-
-    <p>
-        TKJ Digital Network merupakan website company profile
-        yang memperkenalkan kompetensi Teknik Komputer dan
-        Jaringan. Kami berfokus pada pengembangan keterampilan
-        teknologi, infrastruktur jaringan, perangkat komputer,
-        serta keamanan sistem informasi untuk menghadapi
-        perkembangan era digital.
-    </p>
-</section>
-
-<!-- SKILLS -->
-<section id="skills">
-    <h2 class="section-title">Our Expertise</h2>
-
-    <p class="section-desc">
-        Kompetensi utama yang dipelajari di jurusan TKJ.
-    </p>
-
-    <div class="cards">
-
-        <div class="card">
-            <div class="icon">🌐</div>
-            <h3>Networking</h3>
-            <p>
-                Mempelajari konfigurasi jaringan LAN,
-                WAN, routing, switching, dan internet.
-            </p>
+    <!-- Tentang Kami -->
+    <section id="tentang">
+        <h2>Profil Sekolah</h2>
+        <div class="card" style="text-align: center; max-width: 850px; margin: 0 auto;">
+            <p><strong>SMK Banjar Asri</strong> adalah lembaga pendidikan kejuruan yang berkomitmen mencetak lulusan kompeten, berkarakter, dan siap kerja maupun berwirausaha. Dilengkapi dengan fasilitas praktik berstandar industri, kami membekali siswa dengan keterampilan teknis dan sertifikasi profesi yang relevan dengan kebutuhan dunia kerja masa kini.</p>
         </div>
+    </section>
 
-        <div class="card">
-            <div class="icon">💻</div>
-            <h3>Programming</h3>
-            <p>
-                Mempelajari HTML, CSS, JavaScript,
-                serta pengembangan website.
-            </p>
+    <!-- Kompetensi Keahlian (3 Jurusan) -->
+    <section id="jurusan">
+        <h2>Kompetensi Keahlian</h2>
+        <div class="grid-container">
+            <!-- Jurusan 1: TKJ -->
+            <div class="card">
+                <span class="badge">TKJ</span>
+                <h3>Teknik Komputer dan Jaringan</h3>
+                <p>Mempelajari perakitan komputer, instalasi sistem operasi, administrasi server (Linux/Windows), konfigurasi router (MikroTik & Cisco), serta teknologi jaringan nirkabel dan Fiber Optic.</p>
+            </div>
+
+            <!-- Jurusan 2: TKR -->
+            <div class="card">
+                <span class="badge">TKR</span>
+                <h3>Teknik Kendaraan Ringan</h3>
+                <p>Berfokus pada perawatan, perbaikan, dan diagnosa sistem mekanik maupun kelistrikan mobil, teknologi mesin injeksi (EFI), sistem pemindah tenaga, sasis, serta sistem AC kendaraan.</p>
+            </div>
+
+            <!-- Jurusan 3: TAV -->
+            <div class="card">
+                <span class="badge">TAV</span>
+                <h3>Teknik Audio Video</h3>
+                <p>Menguasai perancangan, perakitan, dan perbaikan perangkat elektronika konsumen, sistem tata suara (sound system), instalasi CCTV, pemrograman mikrokontroler, hingga sistem penyiaran digital.</p>
+            </div>
         </div>
+    </section>
 
-        <div class="card">
-            <div class="icon">🖥️</div>
-            <h3>Computer Hardware</h3>
-            <p>
-                Mempelajari perakitan komputer,
-                instalasi sistem operasi, dan troubleshooting.
-            </p>
-        </div>
+    <!-- Pimpinan & Ketua Jurusan (Di-generate lewat JS) -->
+    <section id="pimpinan">
+        <h2>Struktur Pimpinan & Kepala Jurusan</h2>
+        <div class="grid-container" id="team-container"></div>
+    </section>
 
-        <div class="card">
-            <div class="icon">🔐</div>
-            <h3>Cyber Security</h3>
-            <p>
-                Mengenal keamanan jaringan, perlindungan
-                data, dan dasar keamanan sistem.
-            </p>
-        </div>
+    <!-- Kontak / Pendaftaran PPDB -->
+    <section id="ppdb">
+        <h2>Hubungi Kami / Pendaftaran Siswa Baru</h2>
+        <form id="contact-form">
+            <input type="text" id="nama" placeholder="Nama Lengkap Calon Siswa / Pengirim" required>
+            <input type="email" id="email" placeholder="Alamat Email Aktif" required>
+            <select id="pilihan-jurusan" required>
+                <option value="" disabled selected>-- Pilih Jurusan yang Diminati --</option>
+                <option value="TKJ">Teknik Komputer dan Jaringan (TKJ)</option>
+                <option value="TKR">Teknik Kendaraan Ringan (TKR)</option>
+                <option value="TAV">Teknik Audio Video (TAV)</option>
+            </select>
+            <textarea id="pesan" rows="4" placeholder="Tulis pertanyaan seputar pendaftaran atau informasi sekolah..." required></textarea>
+            <button type="submit" class="btn">Kirim Pesan</button>
+        </form>
+    </section>
 
-    </div>
-</section>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 SMK BANJAR ASRI. Mencetak Generasi Unggul, Terampil, dan Berakhlak Mulia.</p>
+    </footer>
 
-<!-- FACILITIES -->
-<section class="about" id="facilities">
-    <h2 class="section-title">Our Facilities</h2>
+    <!-- JavaScript -->
+    <script>
+        // 1. Efek Mengetik Otomatis (Typing Effect)
+        const texts = [
+            "Mencetak Lulusan Kompeten dan Siap Kerja.",
+            "Unggul dalam Bidang TKJ, TKR, dan TAV.",
+            "SMK Bisa, SMK Hebat, SMK Banjar Asri Luar Biasa!"
+        ];
+        let count = 0;
+        let index = 0;
+        let currentText = "";
+        let letter = "";
 
-    <p class="section-desc">
-        Sarana pendukung kegiatan belajar dan praktik.
-    </p>
-
-    <div class="cards">
-
-        <div class="card">
-            <div class="icon">🖥️</div>
-            <h3>Computer Laboratory</h3>
-            <p>Laboratorium komputer untuk kegiatan praktik.</p>
-        </div>
-
-        <div class="card">
-            <div class="icon">📡</div>
-            <h3>Networking Tools</h3>
-            <p>Peralatan praktik konfigurasi jaringan komputer.</p>
-        </div>
-
-        <div class="card">
-            <div class="icon">🛜</div>
-            <h3>Network Infrastructure</h3>
-            <p>Media pembelajaran infrastruktur jaringan.</p>
-        </div>
-
-    </div>
-</section>
-
-<!-- CONTACT -->
-<section class="contact" id="contact">
-    <h2 class="section-title">Contact Us</h2>
-
-    <p class="section-desc">
-        Punya pertanyaan? Kirim pesan kepada kami!
-    </p>
-
-    <form id="contactForm">
-
-        <input type="text" id="nama"
-        placeholder="Nama lengkap" required>
-
-        <input type="email" id="email"
-        placeholder="Alamat email" required>
-
-        <textarea id="pesan"
-        placeholder="Tulis pesan kamu..." required></textarea>
-
-        <button type="submit" class="btn">
-            Send Message
-        </button>
-
-        <p id="status"></p>
-
-    </form>
-</section>
-
-<footer>
-    <p>© 2026 TKJ Digital Network.</p>
-    <p>Building Skills, Connecting The Future.</p>
-</footer>
-
-<script>
-
-// =================================
-// SUPABASE CONFIGURATION
-// =================================
-
-// Ganti dengan URL dan Anon Key Supabase kamu.
-
-const SUPABASE_URL = "qwdwmwvhijjskgwgxhio";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3ZHdtd3ZoaWpqc2tnd2d4aGlvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ5MDk1MDEsImV4cCI6MjExMDQ4NTUwMX0.YsCLt4R3Wdap5T-fv_NQD8hzan7J2fbtUPU8WwONMeo";
-
-let supabaseClient = null;
-
-if (
-    SUPABASE_URL.startsWith("https://") &&
-    SUPABASE_KEY !== "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3ZHdtd3ZoaWpqc2tnd2d4aGlvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ5MDk1MDEsImV4cCI6MjExMDQ4NTUwMX0.YsCLt4R3Wdap5T-fv_NQD8hzan7J2fbtUPU8WwONMeo"
-) {
-    supabaseClient = window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-    );
-}
-
-// =================================
-// CONTACT FORM
-// =================================
-
-const form = document.getElementById("contactForm");
-const statusText = document.getElementById("status");
-
-form.addEventListener("submit", async function(e) {
-
-    e.preventDefault();
-
-    const nama = document.getElementById("nama").value;
-    const email = document.getElementById("email").value;
-    const pesan = document.getElementById("pesan").value;
-
-    if (!supabaseClient) {
-        statusText.textContent =
-            "Hubungkan Supabase terlebih dahulu!";
-        return;
-    }
-
-    statusText.textContent = "Mengirim pesan...";
-
-    const { error } = await supabaseClient
-        .from("pesan")
-        .insert([
-            {
-                nama: nama,
-                email: email,
-                pesan: pesan
+        (function type() {
+            if (count === texts.length) {
+                count = 0;
             }
-        ]);
+            currentText = texts[count];
+            letter = currentText.slice(0, ++index);
 
-    if (error) {
-        console.error(error);
-        statusText.textContent =
-            "Pesan gagal dikirim. Silakan coba lagi.";
-    } else {
-        statusText.textContent =
-            "Pesan berhasil dikirim!";
-        form.reset();
-    }
+            document.getElementById("typing-text").textContent = letter;
+            if (letter.length === currentText.length) {
+                count++;
+                index = 0;
+                setTimeout(type, 2000);
+            } else {
+                setTimeout(type, 75);
+            }
+        })();
 
-});
+        // 2. Data Pimpinan & Kepala Kompetensi Keahlian
+        const pimpinan = [
+            { nama: "Drs. H. Ahmad Fauzi, M.Pd.", jabatan: "Kepala Sekolah", inisial: "KS" },
+            { nama: "Rudi Hartono, S.Kom.", jabatan: "Kepala Jurusan TKJ", inisial: "TKJ" },
+            { nama: "Dedi Kurniawan, S.T.", jabatan: "Kepala Jurusan TKR", inisial: "TKR" },
+            { nama: "Eko Prasetyo, S.Pd.", jabatan: "Kepala Jurusan TAV", inisial: "TAV" }
+        ];
 
-// =================================
-// SIMPLE SCROLL ANIMATION
-// =================================
+        const teamContainer = document.getElementById("team-container");
+        pimpinan.forEach(staf => {
+            const card = document.createElement("div");
+            card.className = "card team-card";
+            card.innerHTML = `
+                <div class="avatar">${staf.inisial}</div>
+                <h3>${staf.nama}</h3>
+                <p style="color: var(--text-muted);">${staf.jabatan}</p>
+            `;
+            teamContainer.appendChild(card);
+        });
 
-document.querySelectorAll("nav a").forEach(link => {
-    link.addEventListener("click", () => {
-        console.log("Navigasi:", link.textContent);
-    });
-});
-
-</script>
-
+        // 3. Interaksi Form Kontak / PPDB
+        document.getElementById("contact-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const nama = document.getElementById("nama").value;
+            const jurusan = document.getElementById("pilihan-jurusan").value;
+            alert(`Terima kasih, ${nama}! Informasi terkait jurusan ${jurusan} telah terkirim ke panitia PPDB SMK Banjar Asri.`);
+            this.reset();
+        });
+    </script>
 </body>
 </html>

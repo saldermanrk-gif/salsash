@@ -98,6 +98,10 @@
         .btn:hover {
             background-color: #0284c7;
         }
+        .btn:disabled {
+            background-color: #475569;
+            cursor: not-allowed;
+        }
 
         /* Section Umum */
         section {
@@ -280,8 +284,18 @@
         <p>&copy; 2026 SMK BANJAR ASRI. Mencetak Generasi Unggul, Terampil, dan Berakhlak Mulia.</p>
     </footer>
 
+    <!-- Library Supabase CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <!-- JavaScript -->
     <script>
+        // ==========================================
+        // KONFIGURASI SUPABASE (WAJIB DIISI)
+        // ==========================================
+        const SUPABASE_URL = 'https://GANTI-DENGAN-URL-PROYEK-KAMU.supabase.co';
+        const SUPABASE_ANON_KEY = 'GANTI-DENGAN-ANON-KEY-KAMU';
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
         // 1. Efek Mengetik Otomatis (Typing Effect)
         const texts = [
             "Mencetak Lulusan Kompeten dan Siap Kerja.",
@@ -330,13 +344,35 @@
             teamContainer.appendChild(card);
         });
 
-        // 3. Interaksi Form Kontak / PPDB
-        document.getElementById("contact-form").addEventListener("submit", function(e) {
+        // 3. Interaksi Form Kontak / PPDB (Simpan ke Supabase)
+        document.getElementById("contact-form").addEventListener("submit", async function(e) {
             e.preventDefault();
+
+            const btnSubmit = this.querySelector('button[type="submit"]');
+            btnSubmit.textContent = "Mengirim...";
+            btnSubmit.disabled = true;
+
             const nama = document.getElementById("nama").value;
+            const email = document.getElementById("email").value;
             const jurusan = document.getElementById("pilihan-jurusan").value;
-            alert(`Terima kasih, ${nama}! Informasi terkait jurusan ${jurusan} telah terkirim ke panitia PPDB SMK Banjar Asri.`);
-            this.reset();
+            const pesan = document.getElementById("pesan").value;
+
+            const { error } = await supabaseClient
+                .from('pendaftaran_ppdb')
+                .insert([
+                    { nama: nama, email: email, jurusan: jurusan, pesan: pesan }
+                ]);
+
+            if (error) {
+                console.error("Error Supabase:", error);
+                alert("Gagal mengirim pesan: " + error.message);
+            } else {
+                alert(`Terima kasih, ${nama}! Informasi terkait jurusan ${jurusan} telah terkirim ke panitia PPDB SMK Banjar Asri.`);
+                this.reset();
+            }
+
+            btnSubmit.textContent = "Kirim Pesan";
+            btnSubmit.disabled = false;
         });
     </script>
 </body>

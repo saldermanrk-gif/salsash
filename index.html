@@ -117,7 +117,7 @@
         /* Profil & Keahlian (Grid) */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
             gap: 2rem;
         }
         .card {
@@ -126,6 +126,8 @@
             border-radius: 10px;
             border: 1px solid #334155;
             transition: transform 0.3s, border-color 0.3s;
+            display: flex;
+            flex-direction: column;
         }
         .card:hover {
             transform: translateY(-5px);
@@ -137,6 +139,7 @@
         }
         .badge {
             display: inline-block;
+            align-self: flex-start;
             background-color: rgba(14, 165, 233, 0.15);
             color: var(--accent);
             padding: 0.25rem 0.75rem;
@@ -144,6 +147,134 @@
             font-size: 0.85rem;
             font-weight: bold;
             margin-bottom: 1rem;
+        }
+
+        /* Visi & Misi Styling */
+        .visi-box {
+            text-align: center;
+            margin-bottom: 2rem;
+            border: 1px solid var(--accent);
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+        }
+        .visi-quote {
+            font-size: 1.35rem;
+            font-weight: bold;
+            color: var(--text);
+            margin: 0.5rem 0 1.2rem;
+        }
+        .visi-quote span {
+            color: var(--accent);
+        }
+        .barokah-pills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-top: 0.5rem;
+        }
+        .pill {
+            background-color: rgba(14, 165, 233, 0.15);
+            border: 1px solid rgba(14, 165, 233, 0.4);
+            color: var(--text);
+            padding: 0.35rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        .pill strong {
+            color: var(--accent);
+        }
+        .misi-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+        .misi-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            color: var(--text-muted);
+        }
+        .misi-num {
+            background-color: var(--accent);
+            color: #fff;
+            font-weight: bold;
+            min-width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            margin-top: 2px;
+        }
+
+        /* Highlight Materi Belajar Jurusan */
+        .materi-highlight {
+            background-color: rgba(14, 165, 233, 0.08);
+            border-left: 3px solid var(--accent);
+            padding: 1rem 1.1rem;
+            border-radius: 6px;
+            margin-top: 1.2rem;
+        }
+        .materi-highlight h4 {
+            color: var(--accent);
+            font-size: 0.98rem;
+            margin-bottom: 0.6rem;
+            letter-spacing: 0.3px;
+        }
+        .materi-highlight ul {
+            list-style: none;
+            color: var(--text);
+            font-size: 0.92rem;
+        }
+        .materi-highlight ul li {
+            position: relative;
+            padding-left: 1.3rem;
+            margin-bottom: 0.45rem;
+        }
+        .materi-highlight ul li:last-child {
+            margin-bottom: 0;
+        }
+        .materi-highlight ul li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Company Profile Tiap Jurusan */
+        .jurusan-detail {
+            margin-top: 1.2rem;
+            padding-top: 1.1rem;
+            border-top: 1px solid #334155;
+            font-size: 0.92rem;
+        }
+        .jurusan-detail h4 {
+            color: var(--text);
+            font-size: 0.95rem;
+            margin-bottom: 0.4rem;
+            margin-top: 0.9rem;
+        }
+        .jurusan-detail h4:first-child {
+            margin-top: 0;
+        }
+        .jurusan-detail ul {
+            list-style: none;
+            color: var(--text-muted);
+        }
+        .jurusan-detail ul li {
+            position: relative;
+            padding-left: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+        .jurusan-detail ul li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
         }
 
         /* Fasilitas & Pimpinan */
@@ -197,6 +328,7 @@
         @media (max-width: 768px) {
             header h1 { font-size: 2.2rem; }
             .nav-links { display: none; }
+            .visi-quote { font-size: 1.15rem; }
         }
     </style>
 </head>
@@ -207,7 +339,7 @@
         <div class="logo">SMK BANJAR ASRI</div>
         <ul class="nav-links">
             <li><a href="#home">Beranda</a></li>
-            <li><a href="#tentang">Profil</a></li>
+            <li><a href="#tentang">Profil & Visi Misi</a></li>
             <li><a href="#jurusan">Kompetensi Keahlian</a></li>
             <li><a href="#pimpinan">Pimpinan Sekolah</a></li>
             <li><a href="#ppdb">Info PPDB</a></li>
@@ -221,159 +353,165 @@
         <a href="#jurusan" class="btn">Jelajahi Program Keahlian</a>
     </header>
 
-    <!-- Tentang Kami -->
+    <!-- Tentang Kami, Visi & Misi -->
     <section id="tentang">
-        <h2>Profil Sekolah</h2>
-        <div class="card" style="text-align: center; max-width: 850px; margin: 0 auto;">
+        <h2>Profil, Visi & Misi Sekolah</h2>
+        
+        <!-- Deskripsi Profil Singkat -->
+        <div class="card" style="text-align: center; max-width: 900px; margin: 0 auto 2rem;">
             <p><strong>SMK Banjar Asri</strong> adalah lembaga pendidikan kejuruan yang berkomitmen mencetak lulusan kompeten, berkarakter, dan siap kerja maupun berwirausaha. Dilengkapi dengan fasilitas praktik berstandar industri, kami membekali siswa dengan keterampilan teknis dan sertifikasi profesi yang relevan dengan kebutuhan dunia kerja masa kini.</p>
+        </div>
+
+        <!-- Visi Sekolah -->
+        <div class="card visi-box" style="max-width: 900px; margin: 0 auto 2rem;">
+            <span class="badge" style="align-self: center;">VISI SEKOLAH</span>
+            <p class="visi-quote">
+                “Mewujudkan SMK Banjar Asri yang <span>BAROKAH</span> (Bahagia, Religius, Optimis, Kreatif, Aktif, dan Handal).”
+            </p>
+            <div class="barokah-pills">
+                <span class="pill"><strong>B</strong>ahagia</span>
+                <span class="pill"><strong>R</strong>eligius</span>
+                <span class="pill"><strong>O</strong>ptimis</span>
+                <span class="pill"><strong>K</strong>reatif</span>
+                <span class="pill"><strong>A</strong>ktif</span>
+                <span class="pill"><strong>H</strong>andal</span>
+            </div>
+        </div>
+
+        <!-- Misi Sekolah -->
+        <div class="card" style="max-width: 900px; margin: 0 auto;">
+            <span class="badge">MISI SEKOLAH</span>
+            <ul class="misi-list">
+                <li>
+                    <span class="misi-num">1</span>
+                    <span>Menciptakan lingkungan belajar yang nyaman, aman, inklusif, dan menyenangkan sehingga menumbuhkan rasa <strong>bahagia</strong> bagi seluruh warga sekolah.</span>
+                </li>
+                <li>
+                    <span class="misi-num">2</span>
+                    <span>Menanamkan nilai-nilai keimanan, ketakwaan, serta akhlakul karimah dalam setiap aktivitas pembelajaran guna membentuk karakter peserta didik yang <strong>religius</strong>.</span>
+                </li>
+                <li>
+                    <span class="misi-num">3</span>
+                    <span>Membangun mentalitas positif, percaya diri, dan pantang menyerah agar lulusan bersikap <strong>optimis</strong> dalam menghadapi persaingan dunia kerja maupun berwirausaha.</span>
+                </li>
+                <li>
+                    <span class="misi-num">4</span>
+                    <span>Mendorong budaya inovasi dan pemecahan masalah berbasis proyek nyata untuk menghasilkan karya teknologi yang <strong>kreatif</strong> dan bermanfaat.</span>
+                </li>
+                <li>
+                    <span class="misi-num">5</span>
+                    <span>Mengembangkan potensi akademik maupun non-akademik melalui kegiatan intrakurikuler, ekstrakurikuler, dan organisasi siswa yang <strong>aktif</strong> serta berprestasi.</span>
+                </li>
+                <li>
+                    <span class="misi-num">6</span>
+                    <span>Menyelenggarakan pendidikan kejuruan berbasis standar industri (IDUKA) untuk mencetak tenaga kerja teknis yang profesional, tersertifikasi, dan <strong>handal</strong> di bidang TKJ, TKR, dan TAV.</span>
+                </li>
+            </ul>
         </div>
     </section>
 
-    <!-- Kompetensi Keahlian (3 Jurusan) -->
+    <!-- Kompetensi Keahlian & Company Profile Jurusan -->
     <section id="jurusan">
-        <h2>Kompetensi Keahlian</h2>
+        <h2>Kompetensi Keahlian & Profil Jurusan</h2>
         <div class="grid-container">
             <!-- Jurusan 1: TKJ -->
             <div class="card">
                 <span class="badge">TKJ</span>
                 <h3>Teknik Komputer dan Jaringan</h3>
-                <p>Mempelajari perakitan komputer, instalasi sistem operasi, administrasi server (Linux/Windows), konfigurasi router (MikroTik & Cisco), serta teknologi jaringan nirkabel dan Fiber Optic.</p>
+                <p style="color: var(--text-muted);">Membentuk tenaga ahli IT yang menguasai infrastruktur jaringan komputer, administrasi server, dan teknologi internet modern.</p>
+                
+                <!-- Sorotan Utama Materi Pembelajaran -->
+                <div class="materi-highlight">
+                    <h4>Apa Saja yang Dipelajari?</h4>
+                    <ul>
+                        <li><strong>Perakitan & Perbaikan PC:</strong> Merakit komputer, instalasi OS (Windows/Linux), serta diagnosa & perbaikan hardware/software.</li>
+                        <li><strong>Konfigurasi Jaringan (MikroTik & Cisco):</strong> Setting router, manajemen bandwidth, VLAN, hotspot, dan jaringan nirkabel (Wi-Fi).</li>
+                        <li><strong>Administrasi Server & Cloud:</strong> Membangun web server, DNS, DHCP, database server, dan layanan komputasi awan.</li>
+                        <li><strong>Teknologi Fiber Optic:</strong> Instalasi kabel optik, penyambungan serat optik (splicing), dan pengukuran redaman jaringan.</li>
+                        <li><strong>Keamanan Jaringan Dasar:</strong> Konfigurasi firewall dan perlindungan sistem jaringan dari serangan siber.</li>
+                    </ul>
+                </div>
+
+                <div class="jurusan-detail">
+                    <h4>Fasilitas Praktik:</h4>
+                    <ul>
+                        <li>Lab Perakitan & Troubleshooting PC</li>
+                        <li>Lab Jaringan (Router MikroTik & Switch Cisco)</li>
+                        <li>Perangkat Penyambungan Fiber Optic (Splicer)</li>
+                    </ul>
+
+                    <h4>Prospek Karier Lulusan:</h4>
+                    <ul>
+                        <li>Network Engineer / Administrator</li>
+                        <li>IT Support & System Administrator</li>
+                        <li>Teknisi Jaringan Fiber Optic (ISP)</li>
+                        <li>Wirausaha Jasa Layanan IT & Komputer</li>
+                    </ul>
+                </div>
             </div>
 
             <!-- Jurusan 2: TKR -->
             <div class="card">
                 <span class="badge">TKR</span>
                 <h3>Teknik Kendaraan Ringan</h3>
-                <p>Berfokus pada perawatan, perbaikan, dan diagnosa sistem mekanik maupun kelistrikan mobil, teknologi mesin injeksi (EFI), sistem pemindah tenaga, sasis, serta sistem AC kendaraan.</p>
+                <p style="color: var(--text-muted);">Menyiapkan teknisi otomotif profesional dengan budaya kerja bengkel resmi (5R/K3) dan penguasaan teknologi mobil modern.</p>
+                
+                <!-- Sorotan Utama Materi Pembelajaran -->
+                <div class="materi-highlight">
+                    <h4>Apa Saja yang Dipelajari?</h4>
+                    <ul>
+                        <li><strong>Perawatan & Tune-Up Mesin:</strong> Servis berkala mesin bensin maupun diesel konvensional dan modern.</li>
+                        <li><strong>Teknologi Mesin Injeksi (EFI):</strong> Diagnosa kerusakan mesin berbasis komputer menggunakan alat OBD2 Scanner.</li>
+                        <li><strong>Sistem Pemindah Tenaga & Sasis:</strong> Perawatan kopling, transmisi manual & otomatis, gardan, sistem rem (ABS), serta suspensi.</li>
+                        <li><strong>Kelistrikan Bodi & AC Mobil:</strong> Rangkaian penerangan, sistem starter & pengisian (alternator), serta perawatan sistem AC kendaraan.</li>
+                        <li><strong>Keselamatan & Budaya Bengkel (5R/K3):</strong> Penerapan standar operasional prosedur (SOP) bengkel resmi otomotif.</li>
+                    </ul>
+                </div>
+
+                <div class="jurusan-detail">
+                    <h4>Fasilitas Praktik:</h4>
+                    <ul>
+                        <li>Bengkel Praktik Standar Industri Otomotif</li>
+                        <li>Unit Engine Stand EFI & Sistem Kelistrikan</li>
+                        <li>Alat Diagnosa Komputer (OBD2 Scanner) & Spooring</li>
+                    </ul>
+
+                    <h4>Prospek Karier Lulusan:</h4>
+                    <ul>
+                        <li>Mekanik Bengkel Resmi (ATPM)</li>
+                        <li>Service Advisor & Quality Control Pabrik Otomotif</li>
+                        <li>Teknisi Kelistrikan & AC Mobil</li>
+                        <li>Wirausaha Bengkel Otomotif Mandiri</li>
+                    </ul>
+                </div>
             </div>
 
             <!-- Jurusan 3: TAV -->
             <div class="card">
                 <span class="badge">TAV</span>
                 <h3>Teknik Audio Video</h3>
-                <p>Menguasai perancangan, perakitan, dan perbaikan perangkat elektronika konsumen, sistem tata suara (sound system), instalasi CCTV, pemrograman mikrokontroler, hingga sistem penyiaran digital.</p>
-            </div>
-        </div>
-    </section>
+                <p style="color: var(--text-muted);">Mencetak tenaga terampil di bidang rekayasa elektronika, sistem tata suara, penyiaran digital, dan otomasi perangkat cerdas.</p>
+                
+                <!-- Sorotan Utama Materi Pembelajaran -->
+                <div class="materi-highlight">
+                    <h4>Apa Saja yang Dipelajari?</h4>
+                    <ul>
+                        <li><strong>Elektronika Dasar & Desain PCB:</strong> Membaca skema rangkaian, menyolder komponen, hingga merancang dan mencetak papan PCB.</li>
+                        <li><strong>Sistem Tata Suara (Sound System):</strong> Perancangan amplifier, instalasi perangkat audio panggung/ruangan, dan pengolahan sinyal suara.</li>
+                        <li><strong>Perbaikan Perangkat Elektronik:</strong> Troubleshooting dan servis televisi digital, perangkat audio, serta peralatan elektronika rumah tangga.</li>
+                        <li><strong>Mikrokontroler & IoT:</strong> Pemrograman Arduino/ESP32 untuk membuat alat otomatis dan perangkat Smart Home.</li>
+                        <li><strong>Instalasi CCTV & Broadcasting:</strong> Pemasangan sistem kamera keamanan terpadu serta pengoperasian studio produksi audio-video.</li>
+                    </ul>
+                </div>
 
-    <!-- Pimpinan & Ketua Jurusan (Di-generate lewat JS) -->
-    <section id="pimpinan">
-        <h2>Struktur Pimpinan & Kepala Jurusan</h2>
-        <div class="grid-container" id="team-container"></div>
-    </section>
+                <div class="jurusan-detail">
+                    <h4>Fasilitas Praktik:</h4>
+                    <ul>
+                        <li>Workshop Elektronika & Perakitan PCB</li>
+                        <li>Studio Mini Audio-Video & Broadcasting</li>
+                        <li>Trainer Mikrokontroler, IoT, & Instalasi CCTV</li>
+                    </ul>
 
-    <!-- Kontak / Pendaftaran PPDB -->
-    <section id="ppdb">
-        <h2>Hubungi Kami / Pendaftaran Siswa Baru</h2>
-        <form id="contact-form">
-            <input type="text" id="nama" placeholder="Nama Lengkap Calon Siswa / Pengirim" required>
-            <input type="email" id="email" placeholder="Alamat Email Aktif" required>
-            <select id="pilihan-jurusan" required>
-                <option value="" disabled selected>-- Pilih Jurusan yang Diminati --</option>
-                <option value="TKJ">Teknik Komputer dan Jaringan (TKJ)</option>
-                <option value="TKR">Teknik Kendaraan Ringan (TKR)</option>
-                <option value="TAV">Teknik Audio Video (TAV)</option>
-            </select>
-            <textarea id="pesan" rows="4" placeholder="Tulis pertanyaan seputar pendaftaran atau informasi sekolah..." required></textarea>
-            <button type="submit" class="btn">Kirim Pesan</button>
-        </form>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 SMK BANJAR ASRI. Mencetak Generasi Unggul, Terampil, dan Berakhlak Mulia.</p>
-    </footer>
-
-    <!-- Library Supabase CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <!-- JavaScript -->
-    <script>
-        // ==========================================
-        // KONFIGURASI SUPABASE (WAJIB DIISI)
-        // ==========================================
-        const SUPABASE_URL = 'https://qwdwmwvhijjskgwgxhio.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF3ZHdtd3ZoaWpqc2tnd2d4aGlvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ5MDk1MDEsImV4cCI6MjExMDQ4NTUwMX0.YsCLt4R3Wdap5T-fv_NQD8hzan7J2fbtUPU8WwONMeo';
-        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        // 1. Efek Mengetik Otomatis (Typing Effect)
-        const texts = [
-            "Mencetak Lulusan Kompeten dan Siap Kerja.",
-            "Unggul dalam Bidang TKJ, TKR, dan TAV.",
-            "SMK Bisa, SMK Hebat, SMK Banjar Asri Luar Biasa!"
-        ];
-        let count = 0;
-        let index = 0;
-        let currentText = "";
-        let letter = "";
-
-        (function type() {
-            if (count === texts.length) {
-                count = 0;
-            }
-            currentText = texts[count];
-            letter = currentText.slice(0, ++index);
-
-            document.getElementById("typing-text").textContent = letter;
-            if (letter.length === currentText.length) {
-                count++;
-                index = 0;
-                setTimeout(type, 2000);
-            } else {
-                setTimeout(type, 75);
-            }
-        })();
-
-        // 2. Data Pimpinan & Kepala Kompetensi Keahlian
-        const pimpinan = [
-            { nama: "Hendri Purnama, S.Pd.I.", jabatan: "Kepala Sekolah", inisial: "KS" },
-            { nama: "Sonny Indra Pratama, S.Kom.", jabatan: "Kepala Jurusan TKJ", inisial: "TKJ" },
-            { nama: "Aji Sonjaya, S.T.", jabatan: "Kepala Jurusan TKR", inisial: "TKR" },
-            { nama: "Asep Saepudin, S.T.", jabatan: "Kepala Jurusan TAV", inisial: "TAV" }
-        ];
-
-        const teamContainer = document.getElementById("team-container");
-        pimpinan.forEach(staf => {
-            const card = document.createElement("div");
-            card.className = "card team-card";
-            card.innerHTML = `
-                <div class="avatar">${staf.inisial}</div>
-                <h3>${staf.nama}</h3>
-                <p style="color: var(--text-muted);">${staf.jabatan}</p>
-            `;
-            teamContainer.appendChild(card);
-        });
-
-        // 3. Interaksi Form Kontak / PPDB (Simpan ke Supabase)
-        document.getElementById("contact-form").addEventListener("submit", async function(e) {
-            e.preventDefault();
-
-            const btnSubmit = this.querySelector('button[type="submit"]');
-            btnSubmit.textContent = "Mengirim...";
-            btnSubmit.disabled = true;
-
-            const nama = document.getElementById("nama").value;
-            const email = document.getElementById("email").value;
-            const jurusan = document.getElementById("pilihan-jurusan").value;
-            const pesan = document.getElementById("pesan").value;
-
-            const { error } = await supabaseClient
-                .from('pendaftaran_ppdb')
-                .insert([
-                    { nama: nama, email: email, jurusan: jurusan, pesan: pesan }
-                ]);
-
-            if (error) {
-                console.error("Error Supabase:", error);
-                alert("Gagal mengirim pesan: " + error.message);
-            } else {
-                alert(`Terima kasih, ${nama}! Informasi terkait jurusan ${jurusan} telah terkirim ke panitia PPDB SMK Banjar Asri.`);
-                this.reset();
-            }
-
-            btnSubmit.textContent = "Kirim Pesan";
-            btnSubmit.disabled = false;
-        });
-    </script>
-</body>
-</html>
+                    <h4>Prospek Karier Lulusan:</h4>
+                    <ul>
+                     
